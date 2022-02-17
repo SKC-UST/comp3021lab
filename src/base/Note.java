@@ -46,7 +46,7 @@ public class Note {
 	 *  subclass than the first one despite having same title and folder. As a result,
 	 *  the program would totally create 12 notes instead of 11 as in sample.*/
 	public boolean equals(Note note) {
-		if (title == note.getTitle()){
+		if (title.equals(note.getTitle())){
 			return true;
 		}
 		return false;

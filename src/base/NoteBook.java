@@ -35,8 +35,8 @@ public class NoteBook {
 		 *  use that one if already exist*/
 		Folder f = null;
 		for (Folder f1 : folders) {
-			// equals cannot use here since f is null and folderName is not object
-			if(f1.getName() == folderName){
+			// equals usable there (String.equals())
+			if(f1.getName().equals(folderName)){
 				f = f1;
 			}
 		}
