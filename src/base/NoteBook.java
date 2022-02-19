@@ -51,7 +51,7 @@ public class NoteBook {
 		 *  (add note to Folder's ArrayList and return true)*/
 		for (Note n : f.getNotes()) {
 			if(note.equals(n)){
-				System.out.println("Create note " + note.getTitle() + " under folder " + folderName + " failed");
+				System.out.println("Creating note " + note.getTitle() + " under folder " + folderName + " failed");
 				return false;
 			}
 		}
