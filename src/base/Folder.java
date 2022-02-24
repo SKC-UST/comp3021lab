@@ -2,6 +2,7 @@ package base;
 
 /** allow the use of ArrayList*/
 import java.util.ArrayList;
+import java.util.Objects;
 
 /** a class with its own name and an ArrayList of Note object*/
 public class Folder {
@@ -22,12 +23,18 @@ public class Folder {
 
 	/** return caller's (Folder) name*/
 	public String getName(){
-		return this.name;
+		return name;
 	}
 
 	/** return caller's (Folder) ArrayList of Note*/
 	public ArrayList <Note> getNotes(){
-		return this.notes;
+		return notes;
+	}
+
+	/** hashCode note placeholder*/
+	@Override
+	public int hashCode(){
+		return Objects.hash(name);
 	}
 
 	/** toString overriding method modified from Source based on lab notes,

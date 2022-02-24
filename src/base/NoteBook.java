@@ -26,7 +26,7 @@ public class NoteBook {
 
 	/** return caller's (NoteBook) ArrayList of Folder*/
 	public ArrayList<Folder> getFolders() {
-		return this.folders;
+		return folders;
 	}
 
 	/** return true if insertion successful and false otherwise*/
