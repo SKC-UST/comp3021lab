@@ -1,6 +1,8 @@
 package base;
 /** import it for using ArrayList*/
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /** NoteBook class with an ArrayList of Folder objects*/
 public class NoteBook {
@@ -15,6 +17,13 @@ public class NoteBook {
 	/** call constructor to make new TextNote then insert it to a folder with folderName*/
 	public boolean createTextNote(String folderName, String title) {
 		TextNote note = new TextNote(title);
+		return insertNote(folderName, note);
+	}
+
+	/** placeholder to put it in Notebook instead in Textnote*/
+	// Overloading method createTextNote
+	public boolean createTextNote(String folderName, String title, String content){
+		TextNote note = new TextNote(title, content);
 		return insertNote(folderName, note);
 	}
 
@@ -60,5 +69,24 @@ public class NoteBook {
 
 	}
 
+	/** sort notes in each folder in date order ->sort folders in string order, smaller first*/
+	public void sortFolders(){
+		for (Folder f1 : this.folders) {
+			f1.sortNotes(); // sort notes for each notes in a folder
+		}
+		Collections.sort(this.folders); // type casting the array list to list, changes made to array list
 
+	}
+
+	/** search all note in all folder*/
+	public List<Note> searchNotes(String keywords){
+		List<Note> notes = new ArrayList<Note>();
+		for (Folder f1 : folders) { // all folder
+			List<Note> e = f1.searchNotes(keywords); // get search result from a folder
+			if(e != null && !e.isEmpty()){ // not empty result
+				notes.addAll(e); // add item in notes
+			}
+		}
+		return notes;
+	}
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /** a class with 2 subclass of ImageNote and TextNote*/
-public class Note {
+public class Note implements Comparable<Note>{
 	/** parameter in superclass*/
 	private Date date;
 	private String title;
@@ -41,7 +41,17 @@ public class Note {
 		return Objects.equals(title, other.title);
 	}
 
+	/** return date comparison of notes (Trying Date.compareTo, 0=equals, 1 = after o, -1 = before o)
+	 * in other words, may need flip result*/
+	@Override// may need other method than compareTo since larger date is smaller here
+	public int compareTo(Note o){
+		return -(this.date.compareTo(o.date)); // flip result since more recent need smaller value instead of larger
+	}
 
+	/** print date and title of each note*/
+	public String toString(){
+		return date.toString() + "\t" + title;
+	}
 	/*public boolean equals(Note note) {
 		if (title.equals(note.getTitle())){
 			return true;

@@ -1,5 +1,5 @@
 package base;
-/** TextNote is subclass of Note with own String datatype*/
+/** TextNote is subclass of Note with own String data type*/
 public class TextNote extends Note {
 	String content;
 
@@ -7,4 +7,12 @@ public class TextNote extends Note {
 	public TextNote(String title){
 		super(title);
 	}
+
+	/** overloading constructor if have content*/
+	public TextNote(String title, String content){
+		super(title);
+		this.content = content;
+	}
+
+
 }

@@ -2,10 +2,12 @@ package base;
 
 /** allow the use of ArrayList*/
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
+import java.util.List;
 
 /** a class with its own name and an ArrayList of Note object*/
-public class Folder {
+public class Folder implements Comparable<Folder>{
 	private ArrayList<Note> notes;
 	private String name;
 
@@ -78,5 +80,60 @@ public class Folder {
 		return true;
 	}
 
+	/** return name comparison of notes (String.compareTo())*/
+	@Override
+	public int compareTo(Folder o){
+		return this.getName().compareTo(o.getName());
+	}
+	/** sort notes with time order, since notes created at same time, resulting with different than sample output*/
+	public void sortNotes(){
+		Collections.sort(this.notes); // type casting the array list to list, changes made to array list
+	}
 
+	/** search notes that has keywords meeting requirements*/
+	public List<Note> searchNotes(String keywords){
+		List<Note> notes = new ArrayList<Note>(); // list of notes has keywords requirement
+		String insenKeyword = keywords.toLowerCase(); // case insensitive keyword
+		String[] testArray = insenKeyword.split(" "); // split keyword with space
+
+		ArrayList<String> target = new ArrayList<String>(); // for initialization, whole list is AND
+		// which an element is separated by or, in other words, enforcing key1 AND ( key2 OR key3 ) AND key4
+		int j = 0;
+		for (String i : testArray){
+			if (i.equals("or")){ // when meeting or (operation) in keywords
+				target.add(testArray[j - 1] + " " + testArray[j + 1]); // put "or" key in a element
+			}// key OR key
+			++j; // go to another element, representing AND (element AND element)
+
+		}
+
+		for(Note e : this.notes){ // go through all notes
+			boolean set = false; // default: not set note as list's element
+			for(String i : target){ // go through all AND
+				String[] pair = i.split(" "); // split pair of keys
+				for(String half : pair){ // for a key in OR
+					if(e instanceof TextNote){ // TextNote
+						if(e.getTitle().toLowerCase().indexOf(half)!= -1 ||
+								((TextNote)e).content.toLowerCase().indexOf(half)!= -1 ){ // find key in title and content
+							set = true; // found key, can set note as result
+							break; // go to another pair separated by AND
+						}
+					}
+					else{ // ImageNote
+						if(e.getTitle().toLowerCase().indexOf(half)!= -1){ // just find keyword in title
+							set = true;
+							break;
+						}
+					}
+					set = false; // this half not in note, set back to false
+				}
+
+			}
+			if(set){ // can set note as result
+				notes.add(e); // add that note to result
+			}
+			set = false; // back to default
+		}
+		return notes; // return result
+	}
 }
