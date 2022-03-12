@@ -4,14 +4,44 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/** placeholder, needed for fileIO*/
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 /** NoteBook class with an ArrayList of Folder objects*/
-public class NoteBook {
+public class NoteBook implements Serializable{ // for comparable part, need hold
 	private ArrayList<Folder> folders;
+	private static final long serialVersionUID = 1L; // for making NoteBook serializable
 
 	/** construct NoteBook class which initiate an
 	 * empty ArrayList for Folder objects*/
 	public NoteBook(){
 		folders = new ArrayList<Folder>();
+	}
+
+	/**
+	*
+	* Constructor of an object NoteBook from an object serialization on disk
+	* @param file, the path of the file for loading the object serialization
+	*/
+	// normal loadFile process
+	public NoteBook(String file){
+		// How to load object in memory from file
+		FileInputStream fis = null;
+		ObjectInputStream in = null; // originally input stream for both file and object is null
+		try{
+			fis = new FileInputStream(file); // set file stream to input file
+			in = new ObjectInputStream(fis); // object input to file
+			NoteBook n = (NoteBook)in.readObject(); // create a new object from file content
+			in.close();
+			//fis.close(); // close both stream
+			this.folders = n.getFolders(); // constructing object's folders is the one in file
+		}catch (Exception e){
+			//e.printStackTrace();
+		}
 	}
 
 	/** call constructor to make new TextNote then insert it to a folder with folderName*/
@@ -88,5 +118,28 @@ public class NoteBook {
 			}
 		}
 		return notes;
+	}
+
+	/**
+	* method to save the NoteBook instance to file
+	* @param file, the path of the file where to save the object serialization
+	* @return true if save on file is successful, false otherwise
+	*/
+	// normal saveFile process
+	public boolean save(String file){
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+		try{
+			fos = new FileOutputStream(file);
+			out = new ObjectOutputStream(fos);
+			out.writeObject(this); // write current object's content to file
+			out.close();
+			//fos.close();
+			//System.out.println(file);
+		}catch (Exception e){
+			//e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }

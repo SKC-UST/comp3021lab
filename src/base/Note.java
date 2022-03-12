@@ -1,11 +1,12 @@
 package base;
 
+import java.io.Serializable;
 /** import java.util.Date for Date datatype*/
 import java.util.Date;
 import java.util.Objects;
 
 /** a class with 2 subclass of ImageNote and TextNote*/
-public class Note implements Comparable<Note>{
+public class Note implements Comparable<Note>,Serializable{
 	/** parameter in superclass*/
 	private Date date;
 	private String title;

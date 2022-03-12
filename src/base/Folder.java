@@ -1,5 +1,6 @@
 package base;
 
+import java.io.Serializable;
 /** allow the use of ArrayList*/
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +8,7 @@ import java.util.Objects;
 import java.util.List;
 
 /** a class with its own name and an ArrayList of Note object*/
-public class Folder implements Comparable<Folder>{
+public class Folder implements Comparable<Folder>,Serializable{
 	private ArrayList<Note> notes;
 	private String name;
 
