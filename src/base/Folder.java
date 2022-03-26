@@ -100,11 +100,26 @@ public class Folder implements Comparable<Folder>,Serializable{
 		ArrayList<String> target = new ArrayList<String>(); // for initialization, whole list is AND
 		// which an element is separated by or, in other words, enforcing key1 AND ( key2 OR key3 ) AND key4
 		int j = 0;
-		for (String i : testArray){
-			if (i.equals("or")){ // when meeting or (operation) in keywords
-				target.add(testArray[j - 1] + " " + testArray[j + 1]); // put "or" key in a element
-			}// key OR key
-			++j; // go to another element, representing AND (element AND element)
+
+		boolean lab3 = false; // lab 3 which has or keyword
+		for(String i : testArray){
+			if (i.equals("or")){ // keyword has or
+				lab3 = true; // next step do one in lab3
+			}
+		}
+		if(lab3){ // have or keyword
+			for (String i : testArray){
+				if (i.equals("or")){ // when meeting or (operation) in keywords
+					target.add(testArray[j - 1] + " " + testArray[j + 1]); // put "or" key in a element
+				}// key OR key
+				++j; // go to another element, representing AND (element AND element)
+
+			}
+		}
+		else{ // no or keyword
+			for (String i : testArray){
+				target.add(i); // add all string directly
+			}
 
 		}
 
