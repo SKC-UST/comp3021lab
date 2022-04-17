@@ -142,4 +142,13 @@ public class NoteBook implements Serializable{ // for comparable part, need hold
 		}
 		return true;
 	}
+
+	public void addFolder(String folderName) {
+	    // TO DO
+		//System.out.println(folders);
+		Folder newFolder = new Folder(folderName);
+		this.folders.add(newFolder);
+		//System.out.println(folders);
+	}
+
 }

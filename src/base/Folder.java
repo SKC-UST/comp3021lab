@@ -152,4 +152,18 @@ public class Folder implements Comparable<Folder>,Serializable{
 		}
 		return notes; // return result
 	}
+	
+	public boolean removeNotes(String title) {
+		   // TODO
+		   // Given the title of the note, delete it from the folder.
+		   // Return true if it is deleted successfully, otherwise return false. 
+		for(Note e : notes){
+			if(e.getTitle().equals(title)){
+				notes.remove(e);
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
