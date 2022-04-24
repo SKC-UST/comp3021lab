@@ -141,7 +141,7 @@ public class NoteBookWindow extends Application {
 				File file = fileChooser.showOpenDialog(null);
 
 				if (file != null){
-					//todo (bugged)
+					
 					loadNoteBook(file);
 					//updateListView(); //just update listview
 				}
@@ -550,7 +550,7 @@ public class NoteBookWindow extends Application {
 
 		//System.out.println(nb.getFolders().toString());
 		noteBook = nb;
-		//System.out.println(nb.getFolders());
+		System.out.println(nb.getFolders());
 		if (noteBook != null){
 			for(Folder e: noteBook.getFolders()){ // for all folders in Notebook
 				foldersComboBox.getItems().add(e.getName()); // add name to foldersComboBox one by one for which one see first
